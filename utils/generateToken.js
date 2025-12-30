@@ -6,12 +6,11 @@ const generateToken = (userId, res) => {
     });
 
     res.cookie("jwt", token, {
-        maxAge: 15 * 24 * 60 * 1000, //15d 24h 60m 1000ms
-        httpOnly: true, //it prevents xxs attacks
-        secure: true,       // REQUIRED (Render = HTTPS)
-        sameSite: "none",
-        secure: process.env.NODE_ENV !== "production"
-    })
+		httpOnly: true,
+		secure: true,       //REQUIRED for Render (HTTPS)
+		sameSite: "none",   //REQUIRED for Netlify ↔ Render
+		maxAge: 15 * 24 * 60 * 60 * 1000,
+	});
 }
 
 export default generateToken;
